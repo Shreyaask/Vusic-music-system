@@ -1,0 +1,20 @@
+<html>
+ <head>
+  <script type="text/javascript">
+
+   function changeFunc(valo) {
+    var selectBox = document.getElementById("selectBox");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    alert(selectedValue);
+    alert("value"+valo);
+   }
+
+  </script>
+ </head>
+ <body>
+  <select id="selectBox" onchange="location.href='ho this.value ho'">
+   <option value="1">Option #1</option>
+   <option value="2">Option #2</option>
+  </select>
+ </body>
+</html>

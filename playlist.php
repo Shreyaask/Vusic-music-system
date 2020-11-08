@@ -57,7 +57,7 @@ include("config.php");
             <a href="profile.php" class="gmail">Profile</a>';
         } else {
             echo '<a href="login.php" class="youtube" >Login</a>
-            <a href="registration.php" class="gmail">register</a>';
+            <a href="registration.php" class="gmail">Register</a>';
         }
 
         ?>

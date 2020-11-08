@@ -36,7 +36,7 @@ background-image: url("https://media.istockphoto.com/photos/snowflake-material-i
           }
           else{
             echo'<a href="login.php" class="youtube" >Login</a>
-            <a href="registration.php" class="gmail">register</i></a>';
+            <a href="registration.php" class="gmail">Register</i></a>';
           }
   
            ?>
