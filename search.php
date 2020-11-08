@@ -39,7 +39,7 @@ require("config.php") ?>
             <a href="profile.php" class="gmail">Profile</i></a>';
         } else {
             echo '<a href="login.php" class="youtube" >Login</a>
-            <a href="registration.php" class="gmail">register</i></a>';
+            <a href="registration.php" class="gmail">Register</i></a>';
         }
 
         ?>
