@@ -1,12 +1,15 @@
 .image-cls {
     position: relative;
     display: inline-block;
+    
 }
 
 .image {
     opacity: 1;
     transition: .5s ease;
     backface-visibility: hidden;
+    margin-top: 50px;
+    margin-left: 20px;
 }
 
 .image-cls:hover .pl-list {
