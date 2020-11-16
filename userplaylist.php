@@ -21,9 +21,11 @@ if (mysqli_num_rows($query_run) <= 0) {
 
     <head>
         <title>Vusic</title>
-        <link rel="stylesheet" href="css/pl-list.css">
-        <link rel="stylesheet" href="css/table.css">
-        <link rel="stylesheet" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/pl-list.css">
+        <link rel="stylesheet" type="text/css" href="css/table.css">
+        <link rel="stylesheet" type="text/css" href="css/nav.css">
+        <link rel="stylesheet" type="text/css" href="css/upl-list.css">
+        <link rel="stylesheet" type="text/css" href="css/styleindex.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
         <script src="index.js"></script>
         <script type="text/javascript">
@@ -72,9 +74,36 @@ if (mysqli_num_rows($query_run) <= 0) {
                     });
             }
         </script>
+        <style>
+            .maps {
+                background: green;
+            }
+        </style>
     </head>
 
     <body>
+        <!--code for side bar-->
+
+        <div class="navcolor">
+
+            <a class="search" href="index.php">Home</a>
+            <a class="images" href="search.php">Search</a>
+            <a class="maps" href="playlist.php">Playlist</a>
+            <a class="play" href="albums.php">Albums</a>
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo '<a href="logout.php" class="youtube" >Logout</a>
+        <a href="profile.php" class="gmail">Profile</i></a>';
+            } else {
+                echo '<a href="login.php" class="youtube" >Login</a>
+        <a href="registration.php" class="gmail">Register</i></a>';
+            }
+
+            ?>
+
+
+        </div>
+        <br><br><br><br>
         <div class="entityInfo">
 
             <div class="leftSection">
@@ -93,48 +122,45 @@ if (mysqli_num_rows($query_run) <= 0) {
 
         </div>
 
+        <br><br><br><br>
 
-        <div class="tracklistContainer">
-            <ul class="tracklist">
+        <?php
 
-                <?php
-
-                while ($result = mysqli_fetch_assoc($query)) {
-                    $songid = $result["songid"];
-                    $newquery = mysqli_query($con, "SELECT album_cover FROM songs WHERE id='$songid'");
-                    $album = mysqli_fetch_assoc($newquery); ?>
-                    <div class="image-cls">
-                        <span role='link' tabindex='0' onclick="location.href='play.php?id=<?php echo $songid; ?>'">
-                            <img class="image" src="<?php echo $album["album_cover"]; ?>" style="height:150px;width:150px;position:relative;z-index:-10;">
-                        </span>
-                        <div class="pl-list">
-                            <div class='trackOptions'>
-                                <input type='hidden' class='songId' value=''>
-                                <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
-                            </div>
-                            <nav class="optionsMenu">
-                                <input type="hidden" class="songId">
-                                <?php
-                                $dropdown = '<select class="item playlist" onclick="addsonglist(' . $songid . ',this.value)">
-                                            <option value="">Add to playlist</option>';
-                                if (isset($_SESSION["username"])) {
-                                    $query_new = mysqli_query($con, "SELECT id, listname FROM playlist WHERE username='$user'");
-                                    while ($row_new = mysqli_fetch_assoc($query_new)) {
-                                        $id_new = $row_new['id'];
-                                        $name_new = $row_new['listname'];
-
-                                        $dropdown = $dropdown . "<option value='" . $id_new . "'>" . $name_new . "</option>";
-                                    }
-                                }
-                                $dropdown .= "</select>";
-                                echo $dropdown;
-                                ?>
-                            </nav>
-                        </div>
+        while ($result = mysqli_fetch_assoc($query)) {
+            $songid = $result["songid"];
+            $newquery = mysqli_query($con, "SELECT album_cover FROM songs WHERE id='$songid'");
+            $album = mysqli_fetch_assoc($newquery); ?>
+            <div class="image-cls">
+                <span role='link' tabindex='0' onclick="location.href='play.php?id=<?php echo $songid; ?>'">
+                    <img class="image" src="<?php echo $album["album_cover"]; ?>" style="height:150px;width:150px;position:relative;z-index:-10;">
+                </span>
+                <div class="pl-list">
+                    <div class='trackOptions'>
+                        <input type='hidden' class='songId' value=''>
+                        <img class='optionsButton' src='assets/images/icons/more.png' onclick='showOptionsMenu(this)'>
                     </div>
-
-                   <!-- <script>
+                    <nav class="optionsMenu">
+                        <input type="hidden" class="songId">
                         <?php
+                        $dropdown = '<select class="item playlist" onclick="addsonglist(' . $songid . ',this.value)">
+                                            <option value="">Add to playlist</option>';
+                        if (isset($_SESSION["username"])) {
+                            $query_new = mysqli_query($con, "SELECT id, listname FROM playlist WHERE username='$user'");
+                            while ($row_new = mysqli_fetch_assoc($query_new)) {
+                                $id_new = $row_new['id'];
+                                $name_new = $row_new['listname'];
+
+                                $dropdown = $dropdown . "<option value='" . $id_new . "'>" . $name_new . "</option>";
+                            }
+                        }
+                        $dropdown .= "</select>";
+                        echo $dropdown;
+                        ?>
+                    </nav>
+                </div>
+
+                <!-- <script>
+                        <?php/*
                         $querytest = mysqli_query($con, "SELECT songid FROM listsongs WHERE playlistid='$playlistId' ORDER BY songorder ASC");
 
                         $array = array();
@@ -142,21 +168,17 @@ if (mysqli_num_rows($query_run) <= 0) {
                         while ($row_2 = mysqli_fetch_array($querytest)) {
                             array_push($array, $row_2['songid']);
                         }
-                        $songIdArray = $array;
+                        $songIdArray = $array; */
                         ?>
                         var tempSongIds = '<?php echo json_encode($songIdArray); ?>';
                         tempPlaylist = JSON.parse(tempSongIds);
                     </script>-->
-
-            </ul>
-        </div>
-
-
-        <div class="item" onclick="removeFromPlaylist(this, '<?php echo $playlistId; ?>')">Remove from Playlist</div>
+                     <div class="item" onclick="removeFromPlaylist(this, '<?php echo $playlistId; ?>')">Remove from Playlist</div>
+            </div>
 
     </body>
 <?php
-                }
-            } ?>
+        }
+    } ?>
 
     </html>

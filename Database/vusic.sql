@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2020 at 12:05 AM
+-- Generation Time: Nov 16, 2020 at 01:59 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.6
 
@@ -118,7 +118,8 @@ CREATE TABLE `listsongs` (
 
 INSERT INTO `listsongs` (`id`, `songid`, `playlistid`, `songorder`) VALUES
 (2, 1, 7, 1),
-(3, 2, 7, 1);
+(3, 2, 7, 1),
+(4, 3, 7, 3);
 
 -- --------------------------------------------------------
 
@@ -137,7 +138,8 @@ CREATE TABLE `playlist` (
 --
 
 INSERT INTO `playlist` (`id`, `username`, `listname`) VALUES
-(7, 'theni26', 'Nice');
+(7, 'theni26', 'Nice'),
+(8, 'theni26', 'Mine');
 
 -- --------------------------------------------------------
 
@@ -277,13 +279,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `listsongs`
 --
 ALTER TABLE `listsongs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `playlist`
 --
 ALTER TABLE `playlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `songs`
